@@ -1,5 +1,5 @@
 #外部ファイルを取り込む
-require "./a.rb"
+require "./carrier.rb"
 
 list=[]
 instance=Carrier.new
