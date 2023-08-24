@@ -18,12 +18,14 @@ class Carrier
   CLAW_POWER = 30
 
   attr_reader :distance
+  attr_accessor :node_colors
 
   def initialize
     @brick = EV3::Brick.new(EV3::Connections::Bluetooth.new(PORT))
     @brick.connect
     @busy = false
     @grabbing = false
+    @node_colors = []
   end
 
     # 色の取得
@@ -249,44 +251,46 @@ class Carrier
   def busy?
     return @busy
   end
-end
 
-carrier = Carrier.new()
+  def search_map
+    @node_colors << carrier.color # Bマス
+    carrier.advanc
+    @node_colors << carrier.color # Cマス
+    moveN = 0
+    while moveN < 2 do
+      if !carrier.busy?
+        carrier.turnRight
+        @node_colors << carrier.color # D,Eマス
+        moveN += 1
+      end
+    end
 
-# スタート（1マス直進する）
-carrier.color
+    moveN = 0
+    while moveN < 2 do
+      if !carrier.busy?
+        carrier.advance
+        @node_colors << carrier.color # F,Gマス
+        moveN += 1
+      end
+    end
 
-carrier.advance
+    moveN = 0
+    while moveN < 2 do
+      if !carrier.busy?
+        carrier.turnLeft
+        @node_colors << carrier.color # H,Iマス
+        moveN += 1
+      end
+    end
 
-moveN = 0
-while moveN < 2 do
-  if !carrier.busy?
-    carrier.turnRight
-    moveN += 1
-  end
-end
-
-moveN = 0
-while moveN < 2 do
-  if !carrier.busy?
-    carrier.advance
-    moveN += 1
-  end
-end
-
-moveN = 0
-while moveN < 2 do
-  if !carrier.busy?
-    carrier.turnLeft
-    moveN += 1
-  end
-end
-
-moveN = 0
-while moveN < 3 do
-  if !carrier.busy?
-    carrier.advance
-    moveN += 1
+    moveN = 0
+    while moveN < 3 do
+      if !carrier.busy?
+        carrier.advance
+        @node_colors << carrier.color # J,K,Lマス
+        moveN += 1
+      end
+    end
   end
 end
 
