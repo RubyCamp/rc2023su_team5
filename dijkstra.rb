@@ -1,5 +1,6 @@
 #外部ファイルを取り込む
-require_relative "carrier"
+require_relative "./
+carrier"
 
 list=[]
 instance=Carrier.new
