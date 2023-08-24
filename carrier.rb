@@ -258,38 +258,38 @@ class Carrier
     @node_colors << carrier.color # Cマス
     moveN = 0
     while moveN < 2 do
-    if !carrier.busy?
+      if !carrier.busy?
         carrier.turnRight
         @node_colors << carrier.color # D,Eマス
         moveN += 1
-    end
+      end
     end
 
     moveN = 0
     while moveN < 2 do
-    if !carrier.busy?
+      if !carrier.busy?
         carrier.advance
         @node_colors << carrier.color # F,Gマス
         moveN += 1
-    end
+      end
     end
 
     moveN = 0
     while moveN < 2 do
-    if !carrier.busy?
+      if !carrier.busy?
         carrier.turnLeft
         @node_colors << carrier.color # H,Iマス
         moveN += 1
-    end
+      end
     end
 
     moveN = 0
     while moveN < 3 do
-    if !carrier.busy?
+      if !carrier.busy?
         carrier.advance
         @node_colors << carrier.color # J,K,Lマス
         moveN += 1
-    end
+      end
     end
   end
 end
